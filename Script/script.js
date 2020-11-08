@@ -65,7 +65,7 @@ calcKeys.addEventListener('click', (event) => {
 	}
 
 	if ((type === 'backspace' || type === 'reset') && inputDisplay !== '0') {
-		if (type === 'backspace') {
+		if (type === 'backspace' && !isEqualsPressed) {
 			userInput.textContent = inputDisplay.substring(0, inputDisplay.length - 1);
 			equation = equation.substring(0, equation.length - 1);
 			checkForDecimal = checkForDecimal.substring(0, checkForDecimal.length - 1);
@@ -133,7 +133,6 @@ function handleEquation(equation) {
 			firstNumber = equation[operatorIndex-1];
 			operator = equation[operatorIndex];
 			secondNumber = equation[operatorIndex+1];
-			console.log(firstNumber, operator, secondNumber);
 			result = calculate(firstNumber, operator, secondNumber);
 			equation.splice(operatorIndex - 1, 3, result);
 		}
