@@ -72,7 +72,7 @@ calcKeys.addEventListener('click', (event) => {
 		} else {
 			inputDisplay = '0';
 			userInput.textContent = inputDisplay;
-			displayResult.value = '';
+			displayResult.innerHTML = '&nbsp;';
 			isEqualsPressed = false;
 			equation = '';
 			checkForDecimal = '';
