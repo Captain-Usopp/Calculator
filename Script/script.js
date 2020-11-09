@@ -31,9 +31,17 @@ calcKeys.addEventListener('click', (event) => {
 			equation = (previousKeyType === 'operator') ? equation + key.value : key.value;
 			checkForDecimal = checkForDecimal + keyValue;
 		}else {
-			userInput.textContent = inputDisplay + keyValue;
-			equation = equation + key.value;
-			checkForDecimal = checkForDecimal + keyValue;
+			//Check length so that number stays within display box
+			//else replace it with exponential
+			if (checkForDecimal.length >= 19) {
+				var replaceNumber = checkForDecimal;
+				checkForDecimal = Number(checkForDecimal).toExponential(2);
+				userInput.textContent = inputDisplay.replace(replaceNumber, checkForDecimal);
+			}else {
+				userInput.textContent = inputDisplay + keyValue;
+				equation = equation + key.value;
+				checkForDecimal = checkForDecimal + keyValue;
+			}
 		}
 	}
 
@@ -87,7 +95,7 @@ calcKeys.addEventListener('click', (event) => {
 	    const finalResult = handleEquation(equation);
 	    
 	    if (finalResult || finalResult === 0) {
-	    	displayResult.textContent = finalResult;
+	    	displayResult.textContent = (finalResult.toString().length >= 18) ? finalResult.toExponential(2) : finalResult;
 	    } else {
 	    	displayResult.textContent = 'Math Error';	
 	    }
