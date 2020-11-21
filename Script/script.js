@@ -38,7 +38,9 @@ calcKeys.addEventListener('click', (event) => {
 				checkForDecimal = Number(checkForDecimal).toExponential(2);
 				userInput.textContent = inputDisplay.replace(replaceNumber, checkForDecimal);
 			}else {
-				userInput.textContent = inputDisplay + keyValue;
+				//Check for Infinity OR NaN in Display
+				userInput.textContent = userInput.textContent.includes('N') ? 'NaN' : 
+										userInput.textContent.includes('I') ? 'Infinity' : inputDisplay + keyValue;
 				equation = equation + key.value;
 				checkForDecimal = checkForDecimal + keyValue;
 			}
@@ -47,9 +49,11 @@ calcKeys.addEventListener('click', (event) => {
 
 	/*
 		1. Check if operator is pressed AND Equals To (=) is not yet pressed
-		2. Replace checkForDecimal with blank to store next number
+		2. AND Display dose not include Infinity
+		3. Replace checkForDecimal with blank to store next number
 	*/
-	if (type === 'operator' && previousKeyType !== 'operator' && !isEqualsPressed) {
+	if (type === 'operator' && previousKeyType !== 'operator'
+		&& !isEqualsPressed && !inputDisplay.includes('Infinity')) {
 		//calculator.dataset.firstNumber = checkForDecimal;
 		// calculator.dataset.operator = key.id;
 		checkForDecimal = '';
@@ -64,7 +68,8 @@ calcKeys.addEventListener('click', (event) => {
 		3. #2 required so that if user presses decimal after operator, it is not displayed
 		4. check if the number already contains a decimal
 	*/
-	if (type === 'decimal' && (previousKeyType === 'number' || inputDisplay === '0') && !isEqualsPressed) {
+	if (type === 'decimal' && (previousKeyType === 'number' || inputDisplay === '0')
+		&& !isEqualsPressed && !inputDisplay.includes('Infinity')) {
 		if (!checkForDecimal.includes('.')) {
 			userInput.textContent = inputDisplay + keyValue;
 			equation = equation + key.value;
@@ -95,9 +100,10 @@ calcKeys.addEventListener('click', (event) => {
 	    const finalResult = handleEquation(equation);
 	    
 	    if (finalResult || finalResult === 0) {
-	    	displayResult.textContent = (finalResult.toString().length >= 18) ? finalResult.toExponential(2) : finalResult;
+	    	displayResult.textContent = (!Number.isInteger(finalResult)) ? finalResult.toFixed(2) : 
+	    								(finalResult.toString().length >= 16) ? finalResult.toExponential(2) : finalResult ;
 	    } else {
-	    	displayResult.textContent = 'Math Error';	
+	    	displayResult.textContent = 'Math Error';
 	    }
 	    
   }
