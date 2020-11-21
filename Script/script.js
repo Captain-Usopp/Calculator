@@ -176,7 +176,7 @@ document.addEventListener('keydown', (event) => {
 	if (event.key === 'Backspace' || event.key ==='c' || event.key === 'C') {
 		document.getElementById('clear').click();	
 	}
-	if (event.key === '=') {
+	if (event.key === '=' || event.key === 'Enter') {
 		document.getElementById('equals').click();	
 	}
 	if (event.key === '.') {
