@@ -1,6 +1,6 @@
 # Calculator
 
-An online calculator with basic arthimetic operations built using HTML5, CSS3 and JS ES6 features.
+An online calculator with basic arithmetic operations built using HTML5, CSS3 and JS ES6 features.
 It can be controlled by a mouse or by a keyboard. For starting your own calculations [__visit the site__](https://captain-usopp.github.io/Calculator/)
 
 ## Features
@@ -8,7 +8,7 @@ It can be controlled by a mouse or by a keyboard. For starting your own calculat
 * All basic operations are supported (divide, multiple, remainder, add, subtract).
 * Operations performed using __BEDMAS__ rule and follows order of precendence from MDN Library.
 * Keyboard inputs are supported for numbers, opertaors and other options.
-* Comes with options to __clear/delete__ a single input (backspace) OR __clear the whole display.
+* Comes with options to __clear/delete__ a single input (backspace) OR __clear__ the whole display.
 
 ## Acknowledgement
 
